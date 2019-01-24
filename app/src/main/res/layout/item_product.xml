@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="product"
+            type="ru.madbrains.databindingsample.model.Product" />
+
+        <variable
+            name="clickListener"
+            type="ru.madbrains.databindingsample.ui.products.ProductClickListener" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> clickListener.onClick(context, product)}" >
+
+        <ImageView
+            android:id="@+id/productCategoryImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_feed"
+            app:imageId="@{product.categoryId}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/productNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:text="@{product.name}"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/productPriceTextView"
+            app:layout_constraintStart_toEndOf="@+id/productCategoryImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Печенька" />
+
+        <TextView
+            android:id="@+id/productPriceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="@{String.format(@string/item_product_price, product.price)}"
+            app:layout_constraintBottom_toBottomOf="@+id/productNameTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/productNameTextView"
+            tools:text="999 ₽" />
+
+        <TextView
+            android:id="@+id/productDescriptionTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{TextUtils.isEmpty(product.description) ? @string/item_product_empty_description : product.description }"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/productCategoryImageView"
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView"
+            tools:text="Вкусная печенька" />
+
+        <TextView
+            android:id="@+id/productStockTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productDescriptionTextView"
+            app:productStock="@{product.stock}"
+            tools:text="В наличии 2 шт." />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#c0c0c0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productStockTextView" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

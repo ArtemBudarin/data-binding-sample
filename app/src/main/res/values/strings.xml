@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Data Binding Sample</string>
+
+    <string name="item_product_price">%1$s ₽</string>
+    <string name="item_product_empty_description">Описание товара отсуствует</string>
+    <string name="item_product_stock">В наличии %1$s шт.</string>
+    <string name="item_product_stock_out">Товар отсутствует в наличии</string>
+</resources>
